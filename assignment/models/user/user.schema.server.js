@@ -17,7 +17,7 @@ module.exports = function() {
             token:  String,
 
         },
-        role: {type:String, enum:["ADMIN","USER"], default:"USER"},
+        role: {type:String},
 
         follows: [String],
         likes: [String],
