@@ -4,12 +4,12 @@ module.exports = function(app, model) {
     var omdb = require('omdb');
 
 
-    app.get("/api/user/:uid/movie", findMovieForUser);
-    app.get("/api/user/:uid/movie/:wid",findMovieById);
-    app.post("/api/user/:uid/movie", createMovie);
-    app.delete("/api/user/:uid/movie/:wid",deleteMovie);
-    app.put("/api/user/:uid/movie/:wid",updateMovie);
-    app.get("/api/search",searchMovie);
+
+    app.get("/api/movie/:mid",findMovieById);//req mid:imdbId
+    app.post("/api/movie", createMovie);//req movie
+    app.delete("/api/movie/:mid",deleteMovie);//req mid:imdbId
+    app.put("/api/user/:uid/movie/:mid",updateMovie);//req uid:userId mid:movieId. mainly update userLikes;
+    app.get("/api/search",searchMovie);//query title
     function searchMovie(req,res) {
     var title =  req.query.title;
         omdb.search(title, function(err, movies) {
@@ -31,8 +31,8 @@ module.exports = function(app, model) {
         movies
             .createMovie(movie)
             .then(
-                function(website) {
-                    res.send(website);
+                function(movie) {
+                    res.send(movie);
                 },
                 function(error){
                     res.send(error);
@@ -41,15 +41,13 @@ module.exports = function(app, model) {
 
     }
 
-    function findMovieForUser(req, res) {
-
-        var userId = req.params.uId;
-        movies
-
-
-    }
     function findMovieById(req,res) {
+        var movieId = req.params.mid;
         movies
+            .findOne(movieId)
+            .then(function(movie) {
+                res.send(movie);
+            })
 
 
     }
@@ -57,8 +55,26 @@ module.exports = function(app, model) {
 
     function updateMovie(req, res) {
         var userId = req.params.uid;
-        var website = req.body;
+        var movieId = req.params.mid;
         movies
+            .findMovieById(movieId)
+            .then(function(movie) {
+                var mov = movie;
+                var favorateUser = [];
+                if(move.userLikes == null) {
+                    favorateUser.push(userId) ;
+                }else{
+                    favorateUser = mov.userLikes;
+                    favorateUser.push(userId);
+                    mov.userLikes = favorateUser;
+                }
+                movies
+                    .movieLiked(userId,movieId)
+                    .then(function(movie){
+                        res.send(movie);
+                    });
+
+            })
 
 
 
@@ -67,8 +83,9 @@ module.exports = function(app, model) {
 
 
     function deleteMovie(req,res) {
-        var websiteId = req.params.wId;
+        var movieId = req.params.mid;
         movies
+            .delete()
 
 
 

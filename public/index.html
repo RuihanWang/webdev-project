@@ -42,8 +42,10 @@
 
 </head>
 <body >
-<div ng-view>
-
+    <div ng-include='"views/common/header.html"'></div>
+    <br>
+    <div ng-view></div>
+    <div ng-include='"views/common/footer.html"'></div>
 
 </div>
 

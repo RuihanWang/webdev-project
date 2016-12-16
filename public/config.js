@@ -5,69 +5,40 @@
 
     function Config($routeProvider) {
         $routeProvider
-            .when("/home", {
-                templateUrl: "views/user/login.view.client.html",
-                controller: "LoginController",
-                controllerAs: "model"
+            .when("/", {
+                templateUrl : "views/common/home.html",
+                controller: "HomeController",
+                controllerAs: "ctrl"
             })
-            .when("/login", {
-                templateUrl: "views/user/login.view.client.html",
-                controller: "LoginController",
-                controllerAs: "model"
+            .when("/userProfile", {
+                templateUrl: "views/user/userProfile.html",
+                controller: "UserProfileController",
+                controllerAs: "ctrl"
             })
-            .when("/register", {
-                templateUrl: "views/user/register.view.client.html",
-                controller:"RegisterController",
-                controllerAs:"model"
+            .when("/searchMovie", {
+                templateUrl: "views/movie/searchMovie.html",
+                controller: "SearchMovieController",
+                controllerAs: "ctrl"
             })
-            .when("/user/:uid", {
-                templateUrl: "views/user/profile.view.client.html",
-                controller: "ProfileController",
-                controllerAs: "model",
-                resolve: {
-
-                    checkLoggedin: checkLoggedin
-                }
+            .when("/myMovie", {
+                templateUrl: "views/movie/myMovie.html",
+                controller: "myMovieController",
+                controllerAs: "ctrl"
             })
-            .when("/user/:uid/friend", {
-                templateUrl: "views/user/friend.view.client.html",
-                controller: "FriendController",
-                controllerAs: "model"
+            .when("/myFriend", {
+                templateUrl: "views/friend/myFriend.html",
+                controller: "myFriendController",
+                controllerAs: "ctrl"
             })
-            .when("/user/:uid/friend/:fid", {
-                templateUrl: "views/user/friendDetail.view.client.html",
-                controller: "FriendDetailController",
-                controllerAs: "model"
+            .when("/admin", {
+                templateUrl: "views/admin/admin.html",
+                controller: "adminController",
+                controllerAs: "ctrl"
             })
-            // .when("/user/info/:uid", {
-            //     templateUrl: "views/user/profile.view.client.html",
-            //     controller: "ProfileController",
-            //     controllerAs: "model"
-            //
-            // })
-            .when("/user/:uid/movie", {
-                templateUrl: "views/movie/search.view.client.html",
-                controller: "MovieController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/favorate", {
-                templateUrl: "views/movie/favorate.view.client.html",
-                controller: "FavorateController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/favorate/:mid", {
-                templateUrl: "views/movie/movieDetail.view.client.html",
-                controller: "FavorateDetailController",
-                controllerAs: "model"
-
-            })
-            .when("/movie/:mid", {
-                templateUrl: "views/movie/movieDetail.view.client.html",
-                controller: "FavorateDetailController",
-                controllerAs: "model"
-            })
-            .otherwise({
-                redirectTo: "/home"
+            .otherwise("/", {
+                templateUrl : "views/common/home.html",
+                controller: "HomeController",
+                controllerAs: "ctrl"
             });
 
 

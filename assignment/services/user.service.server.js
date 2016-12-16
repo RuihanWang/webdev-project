@@ -16,16 +16,41 @@ module.exports = function(app, model) {
     app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.get ('/api/loggedin', loggedin);
     app.post ('/api/register', register);
+    app.put('/api/user/:uid/movie/:mid',addToFavorate);
 
 
 
     var facebookConfig = {
-        clientID     : process.env.FACEBOOK_CLIENT_ID,
-        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
-    };
+        clientID: "227197854374889",
+        clientSecret: "074b94a903c8b2f1a347330de35f5001",
+        callbackURL: "https://localhost:3000/auth/facebook/callback"
+    }
 
+function addToFavorate (req,res) {
+    var userId = req.params.uid;
+    var movie = req.body;
+    users
+        .findUserById(userId)
+        .then(function (user) {
+            return user;
+        })
+        .then(function(user) {
+            var favorateMovie = [];
+            if(user.favorateMovie == null) {
+                favorateMovie.push(movie.imdbID) ;
+            }else{
+                favorateMovie = user.favorateMovie;
+                favorateMovie.push(movie.imdbID);
+                user.favorateMovie = favorateMovie;
+            }
+           users
+               .updateUser(userId,user)
+               .then(function(user){
+                   res.send(user);
+               });
+        });
 
+}
     function createUser(req, res) {
         var user = req.body;
         users
@@ -151,8 +176,9 @@ module.exports = function(app, model) {
     }
 
     function findUserById(req, res) {
+        var userId = req.params.uid;
         users
-            .findUserById(req.params.uid)
+            .findUserById(userId)
             .then(function (user) {
 
                     res.send(user);

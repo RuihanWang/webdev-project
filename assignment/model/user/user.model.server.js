@@ -58,6 +58,7 @@ module.exports = function() {
                     lastName: user.lastName,
                     email: user.email,
                     phone:user.phone,
+                    favorateMovie: user.favorateMovie,
 
                 }
             })
