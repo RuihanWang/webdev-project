@@ -1,10 +1,19 @@
 var express = require('express');
 var app = express();
 
+var  mongoose = require("mongoose");
+var connectionString = 'mongodb://127.0.0.1:27017/webdev';
 
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+    connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+        process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+        process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+        process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+        process.env.OPENSHIFT_APP_NAME;
+}
+mongoose.connect(connectionString)
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 
@@ -17,7 +26,7 @@ app.use(session({
     saveUninitialized:true
 
 
-    }));
+}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({ secret: process.env.SESSION_SECRET }));

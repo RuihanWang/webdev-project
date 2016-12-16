@@ -1,0 +1,47 @@
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <p class="navbar-text navbar-left pull-left">
+                    <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget"
+                       class="navbar-link">
+                        <span class="glyphicon glyphicon-chevron-left pull-left ajc-nav-glyphicon"></span>
+                    </a>
+                </p>
+                <a class="navbar-brand">
+                    Add ART
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <ul class="list-group">
+        <li class="list-group-item"><a ng-click="model.createWidget('HEADER')"><span class="glyphicon glyphicon-book
+ pull-right"></span>Book</a>
+        </li>
+        <li class="list-group-item"><a ng-click="model.createWidget('HTML')"><span class="glyphicon glyphicon-signal
+ pull-right"></span>Website Design</a></li>
+        <li class="list-group-item"><a ng-click="model.createWidget('TEXT')"><span class="glyphicon glyphicon-pencil
+ pull-right"></span>Art Item</a></li>
+        <li class="list-group-item"><a ng-click="model.createWidget('IMAGE')"><span class="glyphicon glyphicon-picture
+ pull-right"></span>Image</a></li>
+        <li class="list-group-item"><a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/flickr"><span class="glyphicon glyphicon-film
+ pull-right"></span>Movie</a></li>
+        <li class="list-group-item"><a ng-click="model.createWidget('YOUTUBE')"><span class="glyphicon glyphicon-headphones
+ pull-right"></span>Video</a></li>
+    </ul>
+</div>
+
+<footer>
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+                <div class="navbar-text pull-right">
+                    <a href="#/user/{{model.uid}}">
+                        <span class="glyphicon glyphicon-user ajc-nav-glyphicon"></span>
+                    </a>
+                </div>
+
+        </div>
+    </nav>
+</footer>

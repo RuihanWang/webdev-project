@@ -1,0 +1,58 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <p class="navbar-text pull-left">
+            <a href="#/user/{{model.userId}}/website" class="navbar-link">
+                  <span class="glyphicon glyphicon-chevron-left">
+                  </span>
+            </a>
+        </p>
+        <a class="navbar-brand" >
+            New Collection
+        </a>
+        <!--<p class="navbar-text pull-right">-->
+            <!--<a ng-click="model.createWebsite(name, description)" class="navbar-link">-->
+                  <!--<span class="glyphicon glyphicon-ok">-->
+                  <!--</span>-->
+            <!--</a>-->
+        <!--</p>-->
+    </div>
+</nav>
+
+<div class="container">
+    <div ng-if="model.error" class="alert alert-danger" >
+        {{model.error}}
+    </div>
+    <form>
+        <div class="form-group"　  ng-class="{ 'has-error': form.name.$error.required && model.checkitem}">
+            <label for="website-name">Collection Name</label>
+            <input ng-model="name" type="text"
+                   class="form-control"
+                   id="website-name"
+                   value="Kevin"
+                   /> <span ng-show="form.name.$error.required && model.checkitem"
+                            class="help-block"></span>
+        </div>
+        <div class="form-group">
+            <label for="website-description">Description</label>
+                <textarea ng-model="description" rows="4"
+                          id="website-description"
+                          class="form-control"
+                          placeholder="Description">I love panda</textarea>
+        </div>
+    </form>
+    <a ng-click="model.createWebsite(name, description)"  class="btn btn-block btn-success">
+        Save
+    </a>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.userId}}"class="navbar-link">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+
+        </div>
+    </div>
+</nav>

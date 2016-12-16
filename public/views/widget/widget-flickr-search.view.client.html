@@ -1,0 +1,74 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="bar-header">
+            <p class="navbar-text pull-left">
+                <a ng-if="currentUser && model.pid"  href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{model.wwid}}"
+                   class="navbar-link">  <span class="glyphicon glyphicon-chevron-left"></a>
+                    <a ng-if="currentUser && !model.pid" href="#/user/" class="navbar-link">
+                        <span class="glyphicon glyphicon-chevron-left"></a>
+                    <a ng-if="!currentUser" href="#/login"  class="navbar-link"> <span class="glyphicon glyphicon-chevron-left"></a>
+
+
+            </p>
+            <a class="navbar-brand" >
+               Search
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container" >
+    <div ng-show="model.message" class="alert alert-danger" role="alert">{{model.message}}</div>
+            <form>
+                <h3>Type the title of the movie you want to add.</h3>
+                <input ng-model="model.movie.title" class="form-control" placeholder="Enter Here"/>
+                <button ng-if="currentUser && model.pid "  ng-click="model.search(model.movie)" class="btn btn-danger btn-block">Search1</button>
+                <a ng-if="currentUser && !model.pid"  href="#/flickr/{{model.movie.title}}" class="btn btn-danger btn-block">Search2</a>
+                <a ng-if="!currentUser" href="#/flickr/{{model.movie.title}}"  class="btn btn-danger btn-block">Search!</a>
+            </form>
+
+
+    </div>
+    <div ng-if="model.data" class="container">
+        <h3>Search Results</h3>
+        <table class="table table-hover" datatable="">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Year</th>
+                <th>IMDB</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="movie in model.data.Search">
+
+                <td>
+                    <a ng-if="currentUser && model.pid" href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/details/{{movie.imdbID}}">
+                        {{movie.Title}}
+                    </a>
+                    <a ng-if="currentUser && !model.pid" href="#/details/{{movie.imdbID}}">
+                        {{movie.Title}}
+                    </a>
+                    <a ng-if="!currentUser" href="#/details/{{movie.imdbID}}">
+                        {{movie.Title}}
+                    </a>
+                </td>
+                <td>{{movie.Year}}</td>
+                <td>{{movie.imdbID}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.userId}}">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+
+        </div>
+    </div>
+</nav>
+

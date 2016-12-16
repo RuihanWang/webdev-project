@@ -1,0 +1,38 @@
+
+
+<div class="container">
+        <form>
+            <div class="form-group"   ng-class="{ 'has-error': form.name.$error.required && model.checkitem}">
+                <label for="W_name">Name</label>
+                <input ng-model="model.widget.name" type="text" class="form-control" id="W_name"/>
+                 <span ng-show="form.name.$error.required && model.checkitem"
+                       class="help-block">type the name
+            </span>
+            </div>
+            <div class="form-group">
+                <label for="W_text">Text</label>
+                <input ng-model="model.widget.text"  type="text" class="form-control" id="W_text">
+            </div>
+
+            <div class="form-group">
+                <label for="W_URL">URL</label>
+                <input ng-model="model.widget.url" type="url" class="form-control" id="W_URL" placeholder="http://youtube.com">
+            </div>
+
+            <div class="form-group">
+                <label for="W_WIDTH">Width</label>
+                <input ng-model="model.widget.width" type="text" class="form-control" id="W_WIDTH">
+            </div>
+        </form>
+        <a class="btn btn-danger  btn-block"
+           ng-click="model.deleteWidget(model.widget)" >Delete</a>
+    </div>
+<!--<nav class="navbar navbar-default navbar-fixed-bottom">-->
+    <!--<div class="container-fluid">-->
+        <!--<div class="navbar-text pull-right">-->
+            <!--<a href="#/user/{{model.userId}}">-->
+                <!--<span class="glyphicon glyphicon-user"></span>-->
+            <!--</a>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</nav>-->

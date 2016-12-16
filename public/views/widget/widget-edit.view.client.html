@@ -1,0 +1,72 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!--<div class="navbar-header">-->
+            <p class="navbar-text pull-left">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+                   class="navbar-link">
+          <span class="glyphicon glyphicon-chevron-left">
+          </span>
+                </a>
+            </p>
+            <a class="navbar-brand" >
+                Edit Art
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.updateWidget(model.widget)" class="navbar-link">
+          <span class="glyphicon glyphicon-ok">
+          </span>
+                </a>
+            </p>
+        <!--</div>-->
+    </div>
+</nav>
+
+<div class="container">
+    <div ng-if="model.message" class="alert alert-success">
+        {{model.message}}
+    </div>
+    <div ng-if="model.error" class="alert alert-danger" >
+        {{model.error}}
+    </div>
+    <div ng-switch="model.widget.widgetType">
+        <div ng-switch-when="HEADER">
+            <ng-include src="'views/widget/widget-heading.view.client.html'" />
+        </div>
+        <div ng-switch-when="YOUTUBE">
+            <ng-include src="'views/widget/widget-youtube.view.client.html'" />
+        </div>
+        <div ng-switch-when="IMAGE">
+            <ng-include src="'views/widget/widget-image.view.client.html'" />
+        </div>
+        <div ng-switch-when="MOVIE">
+            <ng-include src="'views/widget/widget-youtube.view.client.html'" />
+        </div>
+        <div ng-switch-when="HTML">
+            <ng-include src="'views/widget/widget-html.view.client.html'" />
+        </div>
+        <div ng-switch-when="TEXT">
+            <ng-include src="'views/widget/widget-text.view.client.html'" />
+        </div>
+        <!--<div ng-switch-when="MOVIE">-->
+            <!--<ng-include src="'views/widget/widget-image.view.client.html'" />-->
+        <!--</div>-->
+        <div ng-switch-default>
+            Ooops!!!  Unable load this page.
+            <a class="btn btn-danger  btn-block"
+               ng-click="model.deleteWidget(model.widget)" >Delete</a>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="navbar-inner">
+                <p class="navbar-text">
+                    <a href="#/user/{{model.userId}}" class="navbar-link">
+          <span class="glyphicon glyphicon-user pull-right text-primary">
+          </span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </nav>

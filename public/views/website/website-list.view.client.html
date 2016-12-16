@@ -1,0 +1,52 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <p class="navbar-text pull-left">
+            <a href="#/user/" class="navbar-link">
+                  <span class="glyphicon glyphicon-chevron-left">
+                  </span>
+            </a>
+        </p>
+            <a class="navbar-brand" >
+                My Art Collection
+            </a>
+            <!--<p class="navbar-text pull-right">-->
+                <!--<a href="#/user/{{model.userId}}/website/new" class="navbar-link">-->
+                  <!--<span class="glyphicon glyphicon-plus">-->
+                  <!--</span>-->
+                <!--</a>-->
+            <!--</p>-->
+    </div>
+</nav>
+<div class="container">
+    <ul class="list-group ">
+        <li ng-repeat="website in model.websites" class="list-group-item list-group-item-success">
+            <a href="#/user/{{model.userId}}/website/{{website._id}}/page">
+                {{website.name}}
+            </a>
+            <a href="#/user/{{model.userId}}/website/{{website._id}}" class="pull-right">
+                <span class="glyphicon glyphicon-cog"></span>
+                <span class="glyphicon glyphicon-play"></span>
+            </a>
+        </li>
+    </ul>
+        <a href="#/user/{{model.userId}}/website/new" class="btn btn-block btn-success">
+            Creat A new collection
+        </a>
+
+
+
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-footer">
+            <p class="navbar-text pull-right">
+                <a href="#/user/{{model.userId}}" class="navbar-link">
+                  <span class="glyphicon glyphicon-user">
+                  </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>

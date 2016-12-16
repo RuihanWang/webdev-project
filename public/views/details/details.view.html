@@ -1,0 +1,123 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="bar-header">
+            <p class="navbar-text pull-left">
+                <!--<a ng-if="currentUser" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}"-->
+                   <!--class="navbar-link">-->
+                    <!--<a ng-if="!currentUser" href="#/flickr/"-->
+                       <!--class="navbar-link">-->
+                  <!--<span class="glyphicon glyphicon-chevron-left">-->
+                  <!--</span>-->
+                <!--</a>-->
+                <a ng-if="currentUser && model.pid"  href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/flickr"
+                   class="navbar-link">  <span class="glyphicon glyphicon-chevron-left"></a>
+                <a ng-if="currentUser && !model.pid" href="#/flickr" class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></a>
+                <a ng-if="!currentUser" href="#/login"  class="navbar-link"> <span class="glyphicon glyphicon-chevron-left"></a>
+            </p>
+            <a class="navbar-brand" >
+                Movie Details
+            </a>
+            <!--<p ng-if="!model.wdid" class= "navbar-text pull-right">-->
+                <!--<a ng-click="model.createWidget(model.movie)" class="navbar-link">-->
+                  <!--<span class="glyphicon glyphicon-ok">-->
+                  <!--</span>-->
+                <!--</a>-->
+            <!--</p>-->
+            <!--<p ng-if="model.wdid" class="navbar-text pull-right">-->
+                <!--<a ng-click="model.deleteWidget(model.movie)" class="navbar-link">-->
+                  <!--<span class="glyphicon glyphicon-remove">-->
+                  <!--</span>-->
+                <!--</a>-->
+            <!--</p>-->
+        </div>
+    </div>
+</nav>
+
+<div class="container top >
+
+
+        <div class="container">{{model.movie.poster}}
+          <h4><span class="label label-warning">MOVIE INFORMATION:</span></h4>
+         <img src="{{model.movie.Poster}}" width="100%"/>
+<!--<img src="../image/66.jpg" width="100%"/>-->
+
+        <p class="movie_option"><strong>Name: </strong>{{model.movie.Title}}</p>
+        <p class="movie_option"><strong>Country: </strong>{{model.movie.Country}}</p>
+        <p class="movie_option"><strong>Year: </strong>{{model.movie.Year}}</p>
+        <p class="movie_option"><strong>Category: </strong>{{model.movie.Genre}}</p>
+        <p class="movie_option"><strong>Release date: </strong>{{model.movie.Released}}</p>
+        <p class="movie_option"><strong>Director: </strong>{{model.movie.Director}}</p>
+        <p class="movie_option"><strong>Actors: </strong>{{model.movie.Actors}}</p>
+        <p class="movie_option"><strong>Runtime: </strong>{{model.movie.Runtime}}</p>
+        <p ng-if="currentUser"
+           class="movie_option"
+           style="float: left;">
+            <strong>Like it?</strong>
+        </p>
+        </div>
+</div>
+<!--{{model.movie}}-->
+<!--<div class="container" ng-if="currentUser ">-->
+<div class="container" ng-if="currentUser">
+
+<p ng-if="!model.wdid && model.uid" class= "btn btn-block btn-success" ng-click="model.createWidget(model.movie)">
+    <!--<a ng-click="model.createWidget(model.movie)" class="navbar-link">-->
+        Add this Movie to List
+    <!--</a>-->
+</p>
+<p ng-if="model.wdid && model.uid" class="btn btn-block btn-success" ng-click="model.deleteWidget(model.movie)">
+    <!--<a ng-click="model.deleteWidget(model.movie)" class="navbar-link">-->
+        Delete this Movie from List
+    <!--</a>-->
+</p>
+    <p ng-if="!model.record || !model.record.likes || model.record.likes.indexOf(model.currentUser._id) == -1"
+       class="btn btn-block btn-danger"
+       ng-click="model.favorite(model.movie)">
+        <!--<a ng-click="model.createWidget(model.movie)" class="navbar-link">-->
+        <span class="glyphicon glyphicon-eye-open"></span>  Like this movie
+        <!--</a>-->
+    </p>
+    <p ng-if="model.record && model.record.likes && model.record.likes.indexOf(model.currentUser._id) > -1"
+    class="btn btn-block btn-primary"
+    ng-click="model.unfavorite(model.movie)">
+        <!--<a ng-click="model.deleteWidget(model.movie)" class="navbar-link">-->
+        <span class="glyphicon glyphicon-eye-close"></span> Unlike this movie
+        <!--</a>-->
+    </p>
+    <!--<a href="#/user/{{model.userId}}/website/new" class="btn btn-block btn-success">-->
+       <!--Add this Movie to List</a>-->
+
+        <div class="clearfix"> </div>
+</div>
+
+<div class="container" ng-if= "!currentUser">
+    <a  class= "btn btn-block btn-success" href="#/login">
+        <!--<a ng-click="model.createWidget(model.movie)" class="navbar-link">-->
+        Feel Good? , Go back and Get an account!
+        <!--</a>-->
+    </a>
+    </div>
+<div  class="container" ng-if= "currentUser">
+    <h3 class="desc1 span_3_of_2">who likes it?</h3>
+    <ul>
+        <li ng-repeat="user in model.users" style="font-size: 25px;">
+            <a href="#/user/{{user.username}}/review">
+                <h5>{{user.username}}</h5>
+            </a>
+        </li>
+    </ul>
+</div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/user/">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>
+

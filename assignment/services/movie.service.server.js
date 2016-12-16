@@ -1,93 +1,104 @@
+module.exports = function(app, models) {
+    var movieModel = models.movieModel;
+    var userModel = models.userModel;
 
-module.exports = function(app, model) {
-    var movies = model.MovieModel;
-    var omdb = require('omdb');
+    app.post("/api/project/user/:userId/movie/:imdbID", userLikesMovie);
+    app.get("/api/project/movie/:imdbID/user", findUserLikes);
+    app.get("/api/project/movie/:imdbID", findMovieByImdbID);
+    app.delete("/api/project/user/:userId/movie/:imdbID", userUnlikesMovie);
 
+    function findMovieByImdbID(req, res) {
+        var imdbID = req.params.imdbID;
 
-
-    app.get("/api/movie/:mid",findMovieById);//req mid:imdbId
-    app.post("/api/movie", createMovie);//req movie
-    app.delete("/api/movie/:mid",deleteMovie);//req mid:imdbId
-    app.put("/api/user/:uid/movie/:mid",updateMovie);//req uid:userId mid:movieId. mainly update userLikes;
-    app.get("/api/search",searchMovie);//query title
-    function searchMovie(req,res) {
-    var title =  req.query.title;
-        omdb.search(title, function(err, movies) {
-            if(err) {
-                return console.error(err);
-            }
-
-            if(movies.length < 1) {
-                return console.log('No movies were found!');
-            }
-            console.log(movies);
-            res.send(movies);
-    });
-    }
-
-    function createMovie(req, res) {
-        var movie = req.body;
-
-        movies
-            .createMovie(movie)
+        movieModel
+            .findMovieByImdbID(imdbID)
             .then(
                 function(movie) {
-                    res.send(movie);
+                    res.json(movie);
                 },
-                function(error){
-                    res.send(error);
+                function(err) {
+                    res.status(400).send(err);
+                }
+            )
+    }
+
+
+    function findUserLikes (req, res) {
+        var imdbID = req.params.imdbID;
+        var movie = null;
+
+        movieModel
+            .findMovieByImdbID(imdbID)
+            .then(
+                function(doc) {
+                    movie = doc;
+                    if (movie) {
+                        return userModel.findUsersByIds(movie.likes);
+                    } else {
+                        res.json([]);
+                    }
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(users) {
+                    res.json(users);
+                },
+                function(err) {
+                    res.status(401).send(err);
                 }
             );
-
-    }
-
-    function findMovieById(req,res) {
-        var movieId = req.params.mid;
-        movies
-            .findOne(movieId)
-            .then(function(movie) {
-                res.send(movie);
-            })
-
-
     }
 
 
-    function updateMovie(req, res) {
-        var userId = req.params.uid;
-        var movieId = req.params.mid;
-        movies
-            .findMovieById(movieId)
-            .then(function(movie) {
-                var mov = movie;
-                var favorateUser = [];
-                if(move.userLikes == null) {
-                    favorateUser.push(userId) ;
-                }else{
-                    favorateUser = mov.userLikes;
-                    favorateUser.push(userId);
-                    mov.userLikes = favorateUser;
+
+    function userLikesMovie(req, res) {
+        var movieOmdb  = req.body;
+        var userId = req.params.userId;
+        movieModel
+            .userLikesMovie(userId, movieOmdb)
+            .then(
+                function(movie) {
+                    return userModel.likeMovie(userId, movie)
+                },
+                function(err) {
+                    res.status(401).send(err);
                 }
-                movies
-                    .movieLiked(userId,movieId)
-                    .then(function(movie){
-                        res.send(movie);
-                    });
-
-            })
-
-
-
+            )
+            .then(
+                function(user) {
+                    res.json(user);
+                },
+                function(err) {
+                    res.status(405).send(err);
+                }
+            );
     }
 
+    function userUnlikesMovie(req, res) {
+        var userId = req.params.userId;
+        var imdbID = req.params.imdbID;
 
-
-    function deleteMovie(req,res) {
-        var movieId = req.params.mid;
-        movies
-            .delete()
-
-
-
+        movieModel
+            .userUnlikesMovie(userId, imdbID)
+            .then(
+                function(doc) {
+                    return userModel.undoLikeMovie(userId, imdbID);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(doc) {
+                    res.json(200);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
     }
+
 };

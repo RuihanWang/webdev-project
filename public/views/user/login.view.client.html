@@ -1,26 +1,69 @@
 
-<div class="container" >
-
-
-    <h1>Login</h1>
-    <input type="text"
-           ng-model="model.username"
-           class="form-control"
-           placeholder="username"/>
-    <input type="password"
-           class="form-control"
-           ng-model = "model.password"
-           placeholder="password"/>
-
-    <h1>
-    </h1>
-
-    <a class="btn btn-primary btn-block"
-       ng-click="model.Login(model.username,model.password)">Login</a>
-    <a class="btn btn-success btn-block"
-       href="#/register">Register</a>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <a class="navbar-brand" >Ruihan</a>
 
     </div>
+</nav>
+
+ <div class="container">
+
+     <div class="login-box">
+     <div ng-if="model.error" class="alert alert-danger">
+         {{model.error}}
+     </div>
+        <h1 style="text-align: center;">Welcome,Please Login</h1>
+         <br>
+         <br>
+        <form>
+            <div class="form-group"  ng-class="{ 'has-error': form.username.$error.required && model.checkitem}">
+
+            <input ng-model="username" type="text"
+               class="form-control"
+               placeholder="username"/>
+                  <span ng-show="form.username.$error.required && model.checkitem"
+                        class="help-block">Name is required.
+            </span>
+                </div>
+            <br>
+            <div class="form-group" ng-class="{ 'has-error': form.password.$error.required && model.checkitem}">
+
+            <input ng-model="password" type="password"
+               class="form-control"
+               placeholder="password"/>
+                <span ng-show="form.password.$error.required && model.checkitem"
+                      class="help-block">Password is required.</span>
+                </div>
+            <br>
+            </form>
+        <a ng-click="model.login(username, password)" class="btn btn-primary btn-block"
+           >Login</a>
+         <br>
+        <a class="btn btn-success btn-block"
+           href="#/register">Register</a>
+
+     </div>
 
 
+     <br>
+     <div class="panel panel-warning">
+         <div class="panel-heading">Try Search Movie Demo</div>
+         <div class="panel-body">
+             <div class="input-group">
+                 <input ng-model="model.movie.title"
+                        type="text"
+                        class="form-control">
+                 <span class="input-group-btn">
+                            <a href="#/flickr/{{model.movie.title}}"
+                               class="btn btn-info"
+                               type="button">
+                                <span><strong>Search Movie</strong></span>
+                            </a>
+                        </span>
+             </div>
+         </div>
+     </div>
 
+    </div>
+</body>
+</html>

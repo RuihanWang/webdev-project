@@ -1,0 +1,102 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="bar-header">
+            <p class="navbar-text pull-left">
+                <a href="#/user/{{model.userId}}/website/{{model.webId}}/page" class="navbar-link">
+                  <span class="glyphicon glyphicon-chevron-left">
+                  </span>
+                </a>
+            </p>
+            <a class="navbar-brand" >
+                Art list
+            </a>
+            <!--<p class="navbar-text pull-right">-->
+                <!--<a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget/new" class="navbar-link">-->
+                  <!--<span class="glyphicon glyphicon-plus">-->
+                  <!--</span>-->
+                <!--</a>-->
+            <!--</p>-->
+        </div>
+    </div>
+</nav>
+<!--<div class="container-fluid">-->
+    <!--<wam-sortable sorted="model.sorted(start, end)" data="model.widgets">-->
+
+<div wam-sortable wam-callback="model.reorderWidget(start, end)" class="container">
+    <a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget/new" class="btn btn-block btn-success">
+        Creat an iteam
+    </a>
+    <h3 ><span class="label label-warning">ADDED ITEME:</span></h3>
+    <ul ng-repeat="widget in model.widgets | orderBy : 'order'"
+         class="list-group">
+        <div class="jga-widget-tool">
+            <div ng-switch="widget.widgetType">
+                <div ng-switch-when="MOVIE"  ng-switch="widget.size">
+          <a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget/{{widget._id}}/details/{{widget.imdbID}}">
+              <span class="glyphicon glyphicon-cog"></span></a></div>
+                <div ng-switch-default> <a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+
+                <span class="glyphicon glyphicon-cog"></span>
+            </a></div>
+        </div>
+            </div>
+        <div ng-switch="widget.widgetType">
+            <div ng-switch-when="HEADER" ng-switch="widget.size">
+                    <h1 ng-switch-when="1">{{widget.text}}</h1>
+                    <h2 ng-switch-when="2">{{widget.text}}</h2>
+                    <h3 ng-switch-when="3">{{widget.text}}</h3>
+                    <h4 ng-switch-when="4">{{widget.text}}</h4>
+                    <h5 ng-switch-when="5">{{widget.text}}</h5>
+                    <h6 ng-switch-when="6">{{widget.text}}</h6>
+                    <h1 ng-switch-default>{{widget.text}}</h1>
+            </div>
+
+                <div ng-switch-when="MOVIE" ng-switch="widget.size">
+                    <h5 >{{widget.title}}</h5>
+                </div>
+            <!--//render different widget types in diffrent modules.-->
+            <div ng-switch-when="HTML"><div ng-bind-html="model.getSafeHtml(widget)"></div></div>
+            <div ng-switch-when="IMAGE"><img ng-src="{{widget.url}}" width="{{widget.width}}"/></div>
+            <!--<div ng-switch-when="IMAGE">{{widget}}<img src="..{{widget.url}}" width="{{widget.width}}"/></div>-->
+            <div ng-switch-when="YOUTUBE" class="youtube-widget"><iframe width="{{widget.width}}" ng-src="{{model.getSafeUrl(widget)}}" frameborder="0" allowfullscreen></iframe></div>
+            <div ng-switch-when="TEXT">
+                <div ng-if="widget.formatted" text-angular ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+                ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+                ['indent','outdent'],['html']]"></div>
+                <input ng-if="!widget.formatted && (!widget.rows || widget.rows===1)"
+                       placeholder="{{widget.textInput.placeholder}}" class="form-control"/>
+                <textarea ng-if="!widget.formatted && (widget.rows > 1)"
+                          rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+                          class="form-control">{{widget.text}}</textarea>
+            </div>
+            <div ng-switch-default>Opps, error ...</div>
+        </div>
+
+    </div>
+
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-footer">
+            <p class="navbar-text pull-left">
+                <a href="#/user/{{model.userId}}" class="navbar-link">
+                  <span class="glyphicon glyphicon-play">
+                  </span>
+                </a>
+            </p>
+            <p class="navbar-text pull-left">
+                <a href="#/user/{{model.userId}}" class="navbar-link">
+                  <span class="glyphicon glyphicon-eye-open">
+                  </span>
+                </a>
+            </p>
+            <p class="navbar-text pull-right">
+                <a href="#/user/{{model.userId}}" class="navbar-link">
+                  <span class="glyphicon glyphicon-user">
+                  </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>

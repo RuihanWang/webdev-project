@@ -4,15 +4,14 @@
         .factory("MovieService", movieService);
 
     function movieService($http) {
-        var api = {
+        var service = {
             userLikesMovie: userLikesMovie,
             findUserLikes: findUserLikes,
             findMovieByImdbID: findMovieByImdbID,
-            userUnlikesMovie: userUnlikesMovie,
-            searchMovie:searchMovie
+            userUnlikesMovie: userUnlikesMovie
         };
 
-        return api;
+        return service;
 
         function findUserLikes(imdbID) {
             return $http.get("/api/project/movie/" + imdbID + "/user");
@@ -29,17 +28,5 @@
         function userUnlikesMovie(userId, movie) {
             return $http.delete("/api/project/user/" + userId + "/movie/" + movie.imdbID);
         }
-
-
-
-        function searchMovie(movieName) {
-              var url = "/api/search?title=" +movieName;
-            return $http.get(url);
-
-}
-
     }
-
-
-
 })();

@@ -1,0 +1,116 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" >
+            Profile Review
+        </a>
+        <p class="navbar-text pull-right">
+        </p>
+    </div>
+</nav>
+
+<div class="container" >
+    <div ng-show="model.message" class="alert alert-success" role="alert">{{model.message}}</div>
+    <div ng-show="model.error" class="alert alert-danger" role="alert">{{model.error}}</div>
+    <form><div class="row">
+        <div class="col-xs-8">
+            <div class="register-top-grid">
+                <h3><span class="label label-default">{{model.user.username}}</span></h3>
+                <div>
+                    <span>First Name<label>:</label></span>
+                    {{model.user.firstName}}
+                </div>
+                <div>
+                    <span>Last Name<label>:</label></span>
+                    {{model.user.lastName}}
+                </div>
+                <div>
+                    <span>Email Address<label>:</label></span>
+                    {{model.user.email}}
+                </div>
+                <a class="divider"></a>
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+            <div class="form-group">
+
+                <div class="register-bottom-grid" >
+                    <h3><span class="label label-default">Follow?</span></h3>
+                    <button class="btn btn-danger"
+                            ng-click="model.follow(model.user)">
+
+                <span
+                        class="glyphicon glyphicon-star"></span>
+                    </button>
+                    <button
+                            class="btn btn-primary"
+                            ng-click="model.unfollow(model.user)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div></form>
+    <form>
+
+        <!--<div class="register-top-grid">-->
+            <!--<h3>{{model.user.username}}'s Information</h3>-->
+            <!--<div>-->
+                <!--<span>First Name<label>:</label></span>-->
+                <!--{{model.user.firstName}}-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<span>Last Name<label>:</label></span>-->
+                <!--{{model.user._id}}-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<span>Email Address<label>:</label></span>-->
+                <!--{{model.user.email}}-->
+            <!--</div>-->
+            <!--<a class="divider"></a>-->
+        <!--</div>-->
+
+        <div class="search-grid">
+            <h3 ><span class="label label-warning">He also follows:</span></h3>
+            <div ng-repeat="username in model.user.follows"
+                 class="row"
+                 style="font-size: large;">
+                <div class="col-xs-6">
+                    <a href="#/user/{{username}}/review">{{username}}</a>
+                </div>
+                <div class="col-xs-6"></div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <!--<div class="register-bottom-grid" >-->
+            <!--<h3>Follow?</h3>-->
+            <!--<button class="btn btn-danger"-->
+                    <!--ng-click="model.follow(model.user)">-->
+
+                <!--<span-->
+                      <!--class="glyphicon glyphicon-star"></span>-->
+            <!--</button>-->
+            <!--<button-->
+                    <!--class="btn btn-primary"-->
+                    <!--ng-click="model.unfollow(model.user)">-->
+                <!--<span class="glyphicon glyphicon-remove"></span>-->
+            <!--</button>-->
+        <!--</div>-->
+    </form>
+    <div class="clearfix"> </div>
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-footer">
+
+            <p class="navbar-text pull-right">
+                <a href="#/user/" class="navbar-link">
+                  <span class="glyphicon glyphicon-user">
+                  </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>

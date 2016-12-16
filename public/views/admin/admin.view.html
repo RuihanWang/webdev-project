@@ -1,0 +1,147 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <p class="navbar-text pull-left">
+            <a href="#/user/" class="navbar-link">
+                  <span class="glyphicon glyphicon-chevron-left">
+                  </span>
+            </a>
+        </p>
+        <a class="navbar-brand" >
+            Administration
+        </a>
+        <!--<p class="navbar-text pull-right">-->
+        <!--<a href="#/user/{{model.userId}}/website/{{model.webId}}/page/new" class="navbar-link">-->
+        <!--<span class="glyphicon glyphicon-plus">-->
+        <!--</span>-->
+        <!--</a>-->
+        </p>
+    </div>
+</nav>
+
+<div class="container" >
+    <div ng-show="model.message" class="alert alert-danger" role="alert">{{model.message}}</div>
+    <h3><span class="label label-warning">Users</span></h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        <a ng-hide="model.showDscendUsername"
+                           ng-click="model.sortAscend(model.username)"
+                           class="glyphicon glyphicon-triangle-top">
+                        </a>
+                        <a ng-show="model.showDscendUsername"
+                           ng-click="model.sortDescend(model.username)"
+                           class="glyphicon glyphicon-triangle-bottom">
+                        </a>
+                        Username
+                    </th>
+                    <th>
+                        Password
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        <a ng-hide="model.showDscendRole"
+                           ng-click="model.sortAscend(model.role)"
+                           class="glyphicon glyphicon-triangle-top">
+                        </a>
+                        <a ng-show="model.showDscendRole"
+                           ng-click="model.sortDescend(model.role)"
+                           class="glyphicon glyphicon-triangle-bottom">
+                        </a>
+                        Role
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <input  ng-model="model.user.username"
+                                class="form-control ng-pristine ng-valid ng-touched"
+                                placeholder="username">
+                    </td>
+                    <td>
+                        <input  ng-model="model.user.password"
+                                class="form-control ng-pristine ng-valid ng-touched"
+                                placeholder="password">
+                    </td>
+                    <td>
+                        <input  ng-model="model.user.email"
+                                class="form-control ng-pristine ng-valid ng-touched"
+                                placeholder="email">
+                    </td>
+                    <td>
+                        <!--<input  ng-model="model.user.role"-->
+                                <!--class="form-control ng-pristine ng-valid ng-touched"-->
+                                <!--placeholder="role">-->
+                        <select ng-model="model.user.role" class="form-control ng-pristine ng-valid ng-touched" >
+                            <option>user</option>
+                            <option>admin</option>
+
+                        </select>
+                    </td>
+                    <td>
+                        <div>
+                            <button ng-click="model.addUser(model.user)"
+                                    class="btn btn-primary pull-middle">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </button>
+
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+
+                            <button ng-click="model.updateUser(model.user)"
+                                    class="btn btn-success pull-middle">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in model.users | orderBy: model.type">
+                    <td><a href="#/user/{{user.username}}/review">{{user.username}}</a></td>
+                    <td>{{user.password}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.role}}</td>
+                    <td>
+                        <div>
+                            <button ng-click="model.selectUser(user)"
+                                    class="btn btn-warning pull-middle">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            </button>
+                        </div>
+
+                    </td>
+                    <td>
+                        <div>
+                            <button ng-click="model.deleteUser(user)"
+                                    class="btn btn-danger pull-middle">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.userId}}">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>

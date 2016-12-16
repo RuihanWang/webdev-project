@@ -1,26 +1,57 @@
 <div class="container">
+
+    <div ng-if="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+
     <h1>Register</h1>
+    <form name="registerForm" novalidate>
 
-    <input type="text"
-           class="form-control"
-           placeholder="username"
-            ng-model="model.username"/>
-    <input type="password",
-           class="form-control"
-           placeholder="password"
-           ng-model="model.password"/>
-    <input type="text"
-           class="form-control"
-           placeholder="firstname"
-           ng-model="model.firstname"/>
-    <input type="password"
-           class="form-control"
-           placeholder="lastname"
-           ng-model="model.lastname"/>
+        <div class="form-group"
+             ng-class="{ 'has-error': registerForm.username.$error.required && model.checkitem}">
+            <label>Username</label>
+            <input ng-model="username" class="form-control" type="text"
+                   name="username" placeholder="BOB" required>
+            <span ng-show="registerForm.username.$error.required && model.checkitem"
+                  class="help-block">
+                Username required
+            </span>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error': registerForm.password.$error.required && model.checkitem}">
+            <label>Password</label>
+            <input ng-model="password" class="form-control" type="password"
+                   name="password" placeholder="neu1243" required>
+            <span ng-show="registerForm.password.$error.required && model.checkitem"
+                  class="help-block">
+                Password required
+            </span>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error': form.verifypassword.$error.required && model.checkitem || model.badPassword}">
+            <label>Verify Password</label>
+            <input ng-model="verifyPassword" class="form-control" type="password"
+                   name="verifyPassword" placeholder="password check" required>
+            <span ng-show="registerForm.verifyPassword.$error.required && model.checkitem"
+                  class="help-block">
+                Verify password is required
+            </span>
+            <span ng-show="model.badPassword"
+                  class="help-block">
+                Passwords do not match
+            </span>
 
+        </div>
+        <div class="form-group">
+            <label>Role</label>
+            <!--<select ng-model= "role" class="form-control" >-->
+                <!--<option selected=true>user</option>-->
+                <!--<option >admin</option>-->
+            <!--</select>-->
+            <br >
+            <input type="checkbox"  ng-model= "role" name="role" ng-true-value="'admin'" ng-false-value="'user'" checked> admin<br>
 
-    <a ng-click = "model.register(model.username, model.password,model.firstname, model.lastname)"
-       class=" btn btn-primary btn-block">Register</a>
-    <a class="btn btn-danger  btn-block"
-       href="#/login">Cancel</a>
-</div>
+        </div>
+        <a ng-click="model.register(username, password, verifyPassword,role)" type="submit" class="btn btn-primary btn-block">Register</a>
+        <a class="btn btn-danger btn-block" href="#/login">Cancel</a>
+    </form>

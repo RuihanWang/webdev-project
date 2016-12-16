@@ -1,48 +1,103 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-        <div class="navbar-header">
-            <a href="#/login" class="navbar-link">
-                    <span class="glyphicon glyphicon-left">
-                    </span>
+        <a class="navbar-brand" >
+            <span class="glyphicon glyphicon-education"></span> Profile
+        </a>
+        <p class="navbar-text pull-right">
+            <a ng-click= "model.updateUser(model.user)"  class="navbar-link">
+                  <span class="glyphicon glyphicon-ok">
+                  </span>
             </a>
-            <a class="navbar-brand" href="#/login">
-                Back
-            </a>
-            <p class="navbar-text pull-right">
-
-            </p>
-        </div>
+        </p>
     </div>
 </nav>
 
 
 <div class="container">
-    <h1>Profile</h1>
-    <a class="btn btn-primary btn-block" ng-click="model.getFriends()">Friends</a>
-    <a class="btn btn-primary btn-block" ng-click="model.getFavorate()">My Favorate Movie</a>
+    <div class="input-group">
+        <input ng-model="model.movie.title"
+               type="text"
+               class="form-control">
+                        <span class="input-group-btn">
+                            <a href="#/flickr/{{model.movie.title}}"
+                               class="btn btn-info"
+                               type="button">
+                                <span><strong>Search Movie</strong></span>
+                            </a>
+                        </span>
+    </div>
+    <div ng-if="model.success" class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <strong>{{model.success}}</strong>
+    </div>
+    <div ng-if="model.error" class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <strong>{{model.error}}</strong>
+    </div>
     <form>
         <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" placeholder="Username" ng-model="model.user.username">
+            <label for="username"><span class="label label-default">Username</span></label>
+            <input ng-model="model.user.username"  type="text" class="form-control" id="username" placeholder="Username">
         </div>
         <div class="form-group">
-            <label for="first-name">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="password" ng-model="model.user.password">
+            <label for="email"><span class="label label-default">Email addr</span></label>
+            <input ng-model="model.user.email" type="email" class="form-control" id="email" placeholder="mark@neu.edu">
         </div>
+        <div class="form-group">
+            <label for="first-name" ><span class="label label-default">First Name</span></label>
+            <input ng-model="model.user.firstName" type="text" class="form-control" id="first-name" placeholder="Mark">
+        </div>
+        <div class="form-group">
+            <label for="last-name"><span class="label label-default">Last Name</span></label>
+            <input ng-model="model.user.lastName" type="text" class="form-control" id="last-name" placeholder="Kevin">
+        </div>
+        <div class="search-grid">
+            <h4><span class="label label-danger">You followed:</span>
+                </h4>
+            <h4><a class="label label-warning" href="#/list">Network</a></h4>
 
-
-        <div class="form-group">
-            <label for="first-name">First Name</label>
-            <input type="text" class="form-control" id="first-name" placeholder="{{model.user.firstName}}" ng-model="model.user.firstName">
-        </div>
-        <div class="form-group">
-            <label for="last-name">Last Name</label>
-            <input type="text" class="form-control" id="last-name" placeholder="{{model.user.lastName}}" ng-model="model.user.lastName">
+            <!--<h4><a class="label label-warning pull-left" href="#/list" >Network</a></h4>-->
+            <div ng-repeat="username in model.user.follows"
+                 class="list-group-item"
+                 style="font-size: large;">
+                <a href="#/user/{{username}}/review">{{username}}</a>
+                <a href="#/user/{{username}}/review" class="glyphicon glyphicon-user pull-right"></a>
+            </div>
+            <!--<a class="btn btn-warning"-->
+               <!--ng-click="model.logout()"><span class="glyphicon glyphicon-log-out"></span>    Explore Network</a>-->
+            <h4><span class="label label-danger">You likes:</span></h4>
+            <div ng-repeat="movie in model.user.userlikes"
+                 class="list-group-item"
+                 >
+                <a href="#/details/{{movie.imdbID}}">{{movie.title}}</a>
+                <a href="#/details/{{movie.imdbID}}" class="glyphicon glyphicon-film pull-right"></a>
+            </div>
         </div>
     </form>
 
-    <a class="btn btn-primary btn-block" ng-click="model.toSearch()">Start Searching</a>
-    <a class="btn btn-primary btn-block" ng-click="model.UpdateUser(model.user.username, model.user.password,model.user.firstName, model.user.lastName)">Update Profile</a>
-    <a class="btn btn-danger btn-block" ng-click="model.logout()">Logout</a>
+
+    <div class="col-xs-6"></div>
+    <div class="clearfix"> </div>
+    <a class="btn btn-primary btn-block"
+       href="#/user/{{model.user._id}}/website"><span class="glyphicon glyphicon-education"></span>   My collection</a>
+    <a class="btn btn-danger  btn-block"
+       ng-click="model.logout()"><span class="glyphicon glyphicon-log-out"></span>    Logout</a>
+    <a class="btn btn-danger  btn-block" ng-click="model.unRegister()"><span class="glyphicon glyphicon-fire"></span> unregister</a>
 </div>
 
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-left">
+            <a ng-if="model.user.role== 'admin' "  href="#/admin">
+            <label
+                   for="username"><span class="label label-danger">Admin</span></label>
+            </a></div>
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.user._id}}">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+
+        </div>
+    </div>
+</nav>
