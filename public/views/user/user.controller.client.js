@@ -94,7 +94,7 @@
         vm.register = register;
         function register(username, password, firstname, lastname) {
             var user = {username: username, password: password, firstName: firstname, lastName: lastname};
-console.log("guo1")
+console.log("guo1");
 
             UserService
                 .createUser(user)
