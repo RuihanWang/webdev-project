@@ -88,31 +88,30 @@
             }
         }
 
-            function RegisterController(UserService,$routeParams,$location) {
-                var vm = this;
-                vm.register = register;
-                function register( username, password, firstname,lastname ) {
-
-                    var user = {username: username, password: password, firstName:firstname,lastName:lastname};
-
-                                    var use  = UserService.createUser(user);
-                                    use
-                                        .success(RegisterSuccess)
-                                        .error(RegisterError);
+    function RegisterController( $routeParams,UserService, $location) {
+        var vm = this;
+        console.log("jdc")
+        vm.register = register;
+        function register(username,password,firstname, lastname) {
+            var user = {username: username, password: password, firstName: firstname, lastName: lastname};
 
 
+            UserService
+                .createUser(user)
+                .then(function(user) {
+                    console.log(user);
+                    $location.url("/user/" + user._id);
+                });
+        }
 
+        function RegisterSuccess(user) {
+            $location.url("/user/" + user._id);
+        }
+        function RegisterError() {
+            vm.error="RegisterFail";
 
-                    function RegisterSuccess(user) {
-                        $location.url("/user/" + user._id);
-                    }
-                    function RegisterError() {
-                        vm.error="RegisterFail";
-                        vm.alert(vm.error);
-                    }
-                }
-
-            }
+        }
+    }
 
 
 

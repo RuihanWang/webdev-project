@@ -3,8 +3,6 @@ module.exports = function() {
     mongoose.connect('mongodb://localhost/webdev');
 
     var UserModel = require("./user/user.model.server")();
-
-    var WebsiteModel =  require("./website/website.model.server")();
     var MovieModel = require("./movie/movie.model.server")();
 
 
@@ -12,7 +10,6 @@ module.exports = function() {
 
     var model = {
         UserModel :UserModel,
-        WebsiteModel:WebsiteModel,
         MovieModel:MovieModel
 
     };

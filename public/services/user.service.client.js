@@ -33,21 +33,11 @@
             }
 
 
-            function login(username, password) {
-                var url = "/api/login";
-                var user = {
-                    username: username,
-                    password: password
-                };
-                return $http.post(url, user);
+            function login(user) {
+                return $http.post("/api/login", user);
             }
+            function register(user) {
 
-            function register(username, password,role) {
-                var user = {
-                    username: username,
-                    password: password,
-                    role: role
-                };
                 return $http.post("/api/register", user);
             }
 
@@ -68,13 +58,10 @@
                 return $http.post("/api/movie/admin/create", user);
             }
 
-            function createUser(username, password) {
+            function createUser(user) {
                 var url = "/api/user";
-                var newUser = {
-                    username: username,
-                    password: password
-                };
-                return $http.post(url, newUser);
+
+                return $http.post(url, user);
             }
 
             function findUserById(id) {
