@@ -39,12 +39,6 @@
         function createWidget(pageId, newWidget) {
             return $http.post("/api/page/" + pageId + "/widget", newWidget);
         }
-        // function reorderWidget(pageId,start, end) {
-        //     // var pageId =
-        //     console.log(start);
-        //     console.log(end);
-        //     return $http.put("/page/"+pageId+"/widget?start="+start+"&end="+end);
-        // }
     
         function findWidgetsByPageId(pageId){
             var url = "/api/page/"+pageId+"/widget";

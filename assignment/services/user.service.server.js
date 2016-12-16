@@ -8,36 +8,10 @@ module.exports = function(app, models) {
     var userModel = models.userModel;
     var movieModel = models.movieModel;
 
-    // var facebookConfig = {
-    //     clientID     : process.env.FACEBOOK_CLIENT_ID,
-    //     clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-    //     callbackURL  : process.env.FACEBOOK_CALLBACK_URL
-    // };
-    var facebookConfig = {
-
-            clientID     : "227197854374889",
-            clientSecret : "074b94a903c8b2f1a347330de35f5001",
-            callbackURL  : "https://localhost:3000/auth/facebook/callback"
-
-    };
-    //////////////////////////////////////////interface setting/////////////////////////////////////////////////////////
     app.get("/api/user", getUsers);
     app.post("/api/login", passport.authenticate('wam'), login);
     app.get("/api/movie/alluser", findAllUsers);
 
-    // app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-    // app.get('/auth/facebook/callback',
-    //     passport.authenticate('facebook', {
-    //         successRedirect: '/assignment/#/user',
-    //         failureRedirect: '/assignment/#/login'
-    //     }));
-    app.get("/auth/google", passport.authenticate('google', { scope : ['profile', 'email'] }));
-
-    app.get('/auth/google/callback',
-        passport.authenticate('google', {
-            successRedirect: '/#/user',
-            failureRedirect: '/#/login'
-        }));
     app.post("/api/register", register);
     app.post("/api/movie/admin/create", createUserFromAdmin);
     app.post('/api/logout', logout);
@@ -52,13 +26,11 @@ module.exports = function(app, models) {
 
 
     passport.use('wam', new LocalStrategy(localStrategy));
-    // passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
-    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function login(req, res) {
         var user = req.user;
         res.json(user);
@@ -104,7 +76,6 @@ module.exports = function(app, models) {
         if (req.isAuthenticated()) {res.json(req.user);}
         else {res.send('0');}
     }
-///////////////////////////////////////////////////////USER SETTING///////////////////////////////////////////////////////
 
     function createUser(req, res) {
         var newUser = req.body;
@@ -132,7 +103,6 @@ module.exports = function(app, models) {
                 function(error) {res.status(404);}
             );
     }
-////////////////////////////////////////////////////////USER UPDATE/////////////////////////////////////////////////////////
     function updateUser(req, res) {
         var userId = req.params.userId;
         var password = req.body.password;
@@ -245,7 +215,6 @@ module.exports = function(app, models) {
             );
     }
 
-///////////////////////////////////////////////////////THIRDPARTY LOGIN SETTING FUNCTONS/////////////////////////////////
     function authorized(req, res, next) {
         if (!req.isAuthenticated()) {
             res.sendStatus(401);

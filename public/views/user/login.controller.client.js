@@ -3,8 +3,7 @@
         .module("WebAppMaker")
         .controller("LoginController", LoginController);
 
-    
-//login controller takes care of crating new users and checking the neccesary input for this function
+
     function LoginController ($location,UserService){
 
     var vm = this;

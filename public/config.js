@@ -71,12 +71,6 @@
                 }
             })
 
-            // .when("/", {
-            //     templateUrl: "views/index/index.view.client.html",
-            //     controller: "IndexController",
-            //      controllerAs: "model"
-            // })
-
             .when("/login", {
                 templateUrl: "views/user/login.view.client.html",
                 controller: "LoginController",
@@ -109,9 +103,6 @@
                 templateUrl: "views/user/others.view.html",
                 controller: "OthersController",
                 controllerAs: "model",
-                // resolve: {
-                //     loggedin: checkLoggedin
-                // }
             })
   
             .when("/user/:userId/website", {

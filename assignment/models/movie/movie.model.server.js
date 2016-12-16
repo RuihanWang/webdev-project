@@ -1,11 +1,9 @@
 var q = require("q");
 
 module.exports = function() {
-    // load movie schema from movie model
     var mongoose = require("mongoose");
     var MovieSchema = require("./movie.schema.server.js")(mongoose);
 
-    // create movie from schema
     var MovieModel  = mongoose.model("Movie", MovieSchema);
 
     var api = {
@@ -65,20 +63,6 @@ module.exports = function() {
     }
 
     function findMoviesByImdbIDs (imdbIDs) {
-        // var deferred = q.defer();
-        //
-        // MovieModel.find(
-        //     {imdbID: {$in: imdbIDs}},
-        //     function (err, movies) {
-        //         if (err) {
-        //             deferred.reject(err);
-        //         } else {
-        //             deferred.resolve(movies);
-        //         }
-        //     }
-        // );
-        //
-        // return deferred.promise;
         return MovieModel.find({imdbID: {$in: imdbIDs}});
     }
 

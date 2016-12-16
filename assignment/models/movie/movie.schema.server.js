@@ -10,7 +10,7 @@ module.exports = function() {
             userLikes: [
                 {username: String}
             ]
-        }, {collection: 'assignment.movie'});
+        }, {collection: 'movie'});
 
     return MovieSchema;
 };

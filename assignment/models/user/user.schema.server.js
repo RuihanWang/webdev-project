@@ -17,11 +17,12 @@ module.exports = function() {
             token:  String,
 
         },
-        role: String,
+        role: {type:String, enum:["ADMIN","USER"], default:"USER"},
+
         follows: [String],
         likes: [String],
         userlikes: [MovieSchema],
-    }, {collection: "assignment.user"});
+    }, {collection: "user"});
 
     return UserSchema;
 };

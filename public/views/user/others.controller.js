@@ -1,9 +1,9 @@
 (function() {
     angular
         .module("WebAppMaker")
-        .controller("OthersController", othersController);
+        .controller("OthersController", OthersController);
 
-    function othersController($routeParams, UserService) {
+    function OthersController($routeParams, UserService) {
         var vm = this;
 
         vm.message = null;

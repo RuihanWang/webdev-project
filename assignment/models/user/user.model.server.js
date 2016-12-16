@@ -7,7 +7,6 @@ module.exports = function() {
     var mongoose = require("mongoose");
     var UserSchema = require("./user.schema.server")();
     var User = mongoose.model("User", UserSchema);
-/////////////////////////////////////////FUNCTION SETTING//////////////////////////////////////////////////////////////S
     var api = {
         createUser: createUser,
         findUserById: findUserById,
@@ -15,9 +14,6 @@ module.exports = function() {
         findUserByUsername: findUserByUsername,
         updateUser: updateUser,
         deleteUser: deleteUser,
-        // findUserByFacebookId: findUserByFacebookId,
-        findUserByGoogleId: findUserByGoogleId,
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         findUsersByIds: findUsersByIds,
         userLikesMovie: userLikesMovie,
         likeMovie: likeMovie,
@@ -80,7 +76,7 @@ module.exports = function() {
     }
 
 
-//////////////////////////////////////////USER SETTING FUNCTIONS///////////////////////////////////////////////////////
+
     function createUser(user) {
         //creat a new user
         return User.create(user);
@@ -89,28 +85,22 @@ module.exports = function() {
         //delete the particular user
         return User.remove({_id: userId});
     }
-///////////////////////////////////////USER INFORMATION RETRIVAL AND UPADAT////////////////////////////////////////////
 
     function findUserById(userId) {
-///////////////////find the user by the id offerds///////////////////////////////////////////
 
         return User.findById(userId);
     }
     
     function findUserByUser(username, password) {
-////////////////for the given input of the user,check whether a user exits./////////////////
 
         return User.findOne({username: username, password: password});
     }
     
     function findUserByUsername(username) {
-///////////for the particular username ,check whether there is a dupulication in the database
-
         return User.findOne({username: username});
     }
     
     function updateUser(userId, nuser) {
-/////////update the new imformation offered by the user, including fisrt lastname,and email..
 
         return User.update({_id: userId},
             {$set :
@@ -118,12 +108,6 @@ module.exports = function() {
                     firstName: nuser.firstName, lastName: nuser.lastName, email: nuser.email
                 }
             })
-    }
-    // function findUserByGoogleId(facebookId) {
-    //     return User.findOne({'facebook.id': facebookId});
-    // }
-    function findUserByGoogleId(googleId) {
-        return User.findOne({'google.id': googleId});
     }
 
     function createUserFromAdmin(user) {

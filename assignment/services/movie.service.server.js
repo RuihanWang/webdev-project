@@ -1,11 +1,37 @@
 module.exports = function(app, models) {
     var movieModel = models.movieModel;
     var userModel = models.userModel;
+    var omdb = require('omdb');
+
 
     app.post("/api/project/user/:userId/movie/:imdbID", userLikesMovie);
     app.get("/api/project/movie/:imdbID/user", findUserLikes);
     app.get("/api/project/movie/:imdbID", findMovieByImdbID);
     app.delete("/api/project/user/:userId/movie/:imdbID", userUnlikesMovie);
+    app.get("/api/search",searchMovie);
+
+
+    function searchMovie(req,res) {
+        var imdb = req.query.imdbID;
+        var title = req.query.title;
+        var sea;
+        if(title) sea = title;
+        if(imdb) sea = imdb;
+        omdb.search(sea, function(err, movies) {
+            if(err) {
+                res.send(err);
+            }
+
+            if(movies.length < 1) {
+                res.send ('No movies were found!');
+            }
+            console.log(movies)
+            res.send(movies);
+
+            });
+
+        }
+
 
     function findMovieByImdbID(req, res) {
         var imdbID = req.params.imdbID;

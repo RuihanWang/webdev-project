@@ -20,11 +20,11 @@
 <div class="container" >
     <div ng-show="model.message" class="alert alert-danger" role="alert">{{model.message}}</div>
             <form>
-                <h3>Type the title of the movie you want to add.</h3>
+                <h3>Find the movie you like</h3>
                 <input ng-model="model.movie.title" class="form-control" placeholder="Enter Here"/>
-                <button ng-if="currentUser && model.pid "  ng-click="model.search(model.movie)" class="btn btn-danger btn-block">Search1</button>
-                <a ng-if="currentUser && !model.pid"  href="#/flickr/{{model.movie.title}}" class="btn btn-danger btn-block">Search2</a>
-                <a ng-if="!currentUser" href="#/flickr/{{model.movie.title}}"  class="btn btn-danger btn-block">Search!</a>
+                <button ng-if="currentUser && model.pid "  ng-click="model.search(model.movie)" class="btn btn-danger btn-block">Search</button>
+                <a ng-if="currentUser && !model.pid"  href="#/flickr/{{model.movie.title}}" class="btn btn-danger btn-block">Search</a>
+                <a ng-if="!currentUser" href="#/flickr/{{model.movie.title}}"  class="btn btn-danger btn-block">Search</a>
             </form>
 
 

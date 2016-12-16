@@ -29,14 +29,6 @@
 
 
         function updatePage(pageId, page) {
-            // for (var i in pages) {
-            //     if (pages[i]._id === pageId) {
-            //         pages[i].name = page.name;
-            //         pages[i].title = page.title;
-            //         return true;
-            //     }
-            // }
-            // return false;
             var url = "/api/page/" + pageId;
             return $http.put(url, page);
         }
@@ -52,13 +44,6 @@
         }
 
         function findPageByWebsiteId(websiteId) {
-            // var pageresult = [];
-            // for (var i in pages) {
-            //     if (pages[i].websiteId === websiteId) {
-            //         pageresult.push(pages[i]);
-            //     }
-            // }
-            // return pageresult;
             var url = "/api/website/" + websiteId + "/page";
             return $http.get(url);
         }

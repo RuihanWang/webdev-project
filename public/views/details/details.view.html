@@ -35,28 +35,55 @@
     </div>
 </nav>
 
-<div class="container top >
+<div class="container top">
+<div id= "wrapper">
+  <nav class="navbar-default navbar-side" role="navigation">
+<div class="sidebar-collapse">
+    <ul class="nav" id="main-menu">
 
 
-        <div class="container">{{model.movie.poster}}
-          <h4><span class="label label-warning">MOVIE INFORMATION:</span></h4>
-         <img src="{{model.movie.Poster}}" width="100%"/>
-<!--<img src="../image/66.jpg" width="100%"/>-->
+        <li>
+            <a href="#"><i class="fa fa-desktop "></i>Name  {{model.movie.Title}}</a>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-edit "></i>Country  {{model.movie.Country}}<span class="fa arrow"></span></a>
 
-        <p class="movie_option"><strong>Name: </strong>{{model.movie.Title}}</p>
-        <p class="movie_option"><strong>Country: </strong>{{model.movie.Country}}</p>
-        <p class="movie_option"><strong>Year: </strong>{{model.movie.Year}}</p>
-        <p class="movie_option"><strong>Category: </strong>{{model.movie.Genre}}</p>
-        <p class="movie_option"><strong>Release date: </strong>{{model.movie.Released}}</p>
-        <p class="movie_option"><strong>Director: </strong>{{model.movie.Director}}</p>
-        <p class="movie_option"><strong>Actors: </strong>{{model.movie.Actors}}</p>
-        <p class="movie_option"><strong>Runtime: </strong>{{model.movie.Runtime}}</p>
-        <p ng-if="currentUser"
-           class="movie_option"
-           style="float: left;">
-            <strong>Like it?</strong>
-        </p>
-        </div>
+        </li>
+
+        <li>
+            <a href="#"><i class="fa fa-table "></i>Year  {{model.movie.Year}}</a>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-edit "></i>Genre   {{model.movie.Genre}} </a>
+        </li>
+
+
+        <li>
+            <a href="#"><i class="fa fa-sitemap "></i>Released   {{model.movie.Released}}</a>
+
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-qrcode "></i>Director  {{model.movie.Director}}</a>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-bar-chart-o"></i>ACtors   {{model.movie.Actors}}</a>
+        </li>
+
+        <li>
+
+        </li>
+
+    </ul>
+
+</div>
+</nav>
+<div id="page-wrapper" >
+    <div id="page-inner">
+        <img src="{{model.movie.Poster}}" width="100%"/>
+
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
 </div>
 <!--{{model.movie}}-->
 <!--<div class="container" ng-if="currentUser ">-->
