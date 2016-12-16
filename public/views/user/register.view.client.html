@@ -1,0 +1,26 @@
+<div class="container">
+    <h1>Register</h1>
+
+    <input type="text"
+           class="form-control"
+           placeholder="username"
+            ng-model="model.username"/>
+    <input type="password",
+           class="form-control"
+           placeholder="password"
+           ng-model="model.password"/>
+    <input type="text"
+           class="form-control"
+           placeholder="firstname"
+           ng-model="model.firstname"/>
+    <input type="password"
+           class="form-control"
+           placeholder="lastname"
+           ng-model="model.lastname"/>
+
+
+    <a ng-click = "model.register(model.username, model.password,model.firstname, model.lastname)"
+       class=" btn btn-primary btn-block">Register</a>
+    <a class="btn btn-danger  btn-block"
+       href="#/login">Cancel</a>
+</div>

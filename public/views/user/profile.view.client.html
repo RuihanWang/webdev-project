@@ -1,0 +1,48 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="#/login" class="navbar-link">
+                    <span class="glyphicon glyphicon-left">
+                    </span>
+            </a>
+            <a class="navbar-brand" href="#/login">
+                Back
+            </a>
+            <p class="navbar-text pull-right">
+
+            </p>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+    <h1>Profile</h1>
+    <a class="btn btn-primary btn-block" ng-click="model.getFriends()">Friends</a>
+    <a class="btn btn-primary btn-block" ng-click="model.getFavorate()">My Favorate Movie</a>
+    <form>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Username" ng-model="model.user.username">
+        </div>
+        <div class="form-group">
+            <label for="first-name">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="password" ng-model="model.user.password">
+        </div>
+
+
+        <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input type="text" class="form-control" id="first-name" placeholder="{{model.user.firstName}}" ng-model="model.user.firstName">
+        </div>
+        <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input type="text" class="form-control" id="last-name" placeholder="{{model.user.lastName}}" ng-model="model.user.lastName">
+        </div>
+    </form>
+
+    <a class="btn btn-primary btn-block" ng-click="model.toSearch()">Start Searching</a>
+    <a class="btn btn-primary btn-block" ng-click="model.UpdateUser(model.user.username, model.user.password,model.user.firstName, model.user.lastName)">Update Profile</a>
+    <a class="btn btn-danger btn-block" ng-click="model.logout()">Logout</a>
+</div>
+
